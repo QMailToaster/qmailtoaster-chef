@@ -1,0 +1,20 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: centos-6.5
+    driver_config:
+      box: centos-6.5
+      box_url: https://dl.dropboxusercontent.com/u/318299/Vagrant/CentOS/centos-6.5.box
+
+suites:
+  - name: default
+    run_list:
+      - role[qmailtoaster]
+    driver:
+      network:
+        - [ 'forwarded_port', { guest: 80, host: 8080 } ]
