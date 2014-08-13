@@ -13,7 +13,8 @@ end
 
 # deploy our admin account into the htpasswd file
 file node['qmailtoaster']['htpasswd']['file'] do
-  content node['qmailtoaster']['htpasswd']['user'] + ':' + node['qmailtoaster']['htpasswd']['passwordhash']
+  content node['qmailtoaster']['htpasswd']['user'] + ':' +
+    node['qmailtoaster']['htpasswd']['passwordhash']
 end
 
 # Workaround for apache configs not being loaded due to apaches conf.d folder

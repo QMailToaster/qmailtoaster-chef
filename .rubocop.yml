@@ -1,0 +1,16 @@
+AllCops:
+  Exclude:
+    - test/integration/default/serverspec/assert_functioning_spec.rb
+    - bin/**
+    - vendor/**
+    - attributes/**
+    - Cheffile
+    - Berksfile
+    - metadata.rb
+    - cookbooks/**/*
+    - knife.rb
+
+LineLength:
+  Max: 100
+MethodLength:
+  Max: 30

@@ -10,9 +10,9 @@ include_recipe 'database::mysql'
 
 # MySQL connection information with password from data bag
 mysql_connection_info = {
-  :host     => 'localhost',
-  :username => 'root',
-  :password => mysql_creds['server_root_password']
+  host: 'localhost',
+  username: 'root',
+  password: mysql_creds['server_root_password']
 }
 
 # Setup MySQL Service with default configuration from Chef
@@ -30,15 +30,15 @@ end
 # Create vpopmail user, we also use the password set in our data bag
 mysql_database_user vpopmail_db_user do
   connection mysql_connection_info
-  password   mysql_creds['server_vpopmail_password']
+  password mysql_creds['server_vpopmail_password']
   database_name vpopmail_db_name
-  privileges    [:all]
-  action    :grant
+  privileges [:all]
+  action :grant
 end
 
 # Now flush privileges so we can continue
 mysql_database 'flush the privileges' do
   connection mysql_connection_info
-  sql        'flush privileges'
-  action     :query
+  sql 'flush privileges'
+  action :query
 end

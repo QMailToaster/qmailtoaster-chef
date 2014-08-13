@@ -1,2 +1,29 @@
-.kitchen
-*.lock
+# Bundler
+/.bundle/
+/bundle/
+/bin/
+/vendor/
+
+# Berkshelf
+/cookbooks/
+Berksfile.lock
+
+# Librarian
+/tmp/
+Cheffile.lock
+
+# Kitchen
+/.kitchen/
+
+# Vagrant
+.vagrant
+
+# Kitchen
+/.kitchen/
+.kitchen.local.yml
+
+# CI Reports
+/spec/reports
+
+# Emacs
+*~

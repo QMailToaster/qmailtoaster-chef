@@ -7,9 +7,6 @@ provisioner:
 
 platforms:
   - name: centos-6.5
-    driver_config:
-      box: centos-6.5
-      box_url: https://dl.dropboxusercontent.com/u/318299/Vagrant/CentOS/centos-6.5.box
 
 suites:
   - name: default
