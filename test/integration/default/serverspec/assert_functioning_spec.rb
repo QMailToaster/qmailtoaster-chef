@@ -1,9 +1,10 @@
 # encoding: utf-8
 require 'serverspec'
-include Serverspec::Helper::Exec
+
+set :backend, :exec
 
 # Things to test
-services = %w(qmail dovecot)
+services = %w(qmail dovecot freshclam clamd spamd mysqld httpd ntpd)
 ports = [80, 443, 110, 995, 143, 993, 25, 587]
 domain = 'test-domain.org'
 user = 'test'
@@ -42,20 +43,19 @@ commands = [
 
 services.each do |svc|
   describe service(svc) do
-    # NotImplementedError so not checked yet
-    # it { should be_enabled.with_level(3) }
+    it { should be_enabled.with_level(3) }
     it { should be_running }
   end
 end
 
 ports.each do |port|
   describe port(port) do
-    it { should be_listening }
+    it { should be_listening.with('tcp') }
   end
 end
 
 commands.each do |cmd, code|
   describe command(cmd) do
-    it { should return_exit_status code }
+    its(:exit_status) { should eq code }
   end
 end
