@@ -31,6 +31,14 @@ link '/usr/sbin/sendmail' do
   to '/var/qmail/bin/sendmail'
 end
 
+# We have to run sa-update to ensure files exist before starting spamd
+bash 'run_sa-update' do
+  user 'root'
+  cwd '/tmp'
+  code "sa-update"
+  not_if { ::File.exist?('/var/lib/spamassassin') }
+end
+
 # Enable and start all services
 service 'qmail' do
   action [:enable, :start]
@@ -41,5 +49,13 @@ service 'httpd' do
 end
 
 service 'dovecot' do
+  action [:enable, :start]
+end
+
+service 'clamd' do
+  action [:enable, :start]
+end
+
+service 'spamd' do
   action [:enable, :start]
 end
