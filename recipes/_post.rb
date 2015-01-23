@@ -35,7 +35,7 @@ end
 bash 'run_sa-update' do
   user 'root'
   cwd '/tmp'
-  code "sa-update"
+  code 'sa-update'
   not_if { ::File.exist?('/var/lib/spamassassin') }
 end
 
