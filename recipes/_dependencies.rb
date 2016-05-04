@@ -1,9 +1,8 @@
 # encoding: utf-8
-
 download_url = "#{node['qmailtoaster']['repository']['url']}/" +
-  node['qmailtoaster']['repository']['file']
+               node['qmailtoaster']['repository']['file']
 destination_file = "#{Chef::Config[:file_cache_path]}/" +
-  node['qmailtoaster']['repository']['file']
+                   node['qmailtoaster']['repository']['file']
 
 # Install packages required by qmailtoaster
 node['qmailtoaster']['dependencies']['packages'].each do |pkg|
@@ -21,4 +20,6 @@ rpm_package 'qmailtoaster-release' do
 end
 
 # Other packages
-package 'qmailtoaster-util'
+package 'qmailtoaster-util' do
+  only_if { node['platform_version'].to_i < 7 }
+end

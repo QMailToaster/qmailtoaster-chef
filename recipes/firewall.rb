@@ -1,32 +1,17 @@
 # encoding: utf-8
+# Enable default firewall service
+include_recipe 'firewall'
 
-node.set['shorewall']['rules'] = [
-  {
-    description: 'Full access to SSH server',
-    action: :ACCEPT,
-    source: :all,
-    dest: :fw,
-    proto: :tcp,
-    dest_port: 22
-  }, {
-    description: 'Access to Mail Services',
-    action: :ACCEPT,
-    source: :all,
-    dest: :fw,
-    proto: :tcp,
-    dest_port: 'pop3,pop3s,imap,imaps,smtp,submission'
-  }, {
-    description: 'Access to Web Services',
-    action: :ACCEPT,
-    source: :all,
-    dest: :fw,
-    proto: :tcp,
-    dest_port: 'http,https'
-  }
-]
-
-service 'iptables' do
-  action [:disable, :stop]
+# Open specific ports for Toaster Host
+firewall_rule 'http/https' do
+  protocol  :tcp
+  source    '0.0.0.0/0'
+  port      %w(80 443)
+  command   :allow
 end
 
-include_recipe 'shorewall'
+firewall_rule 'qmailtoaster' do
+  protocol  :tcp
+  source    '0.0.0.0/0'
+  port      %w(110 995 143 993 25 587)
+end

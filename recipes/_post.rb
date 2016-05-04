@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 # We now deploy our vpopmail password so vpopmail has access to the database
-mysql_creds       =  Chef::EncryptedDataBagItem.load('mysql', 'credentials')
+mysql_creds = Chef::EncryptedDataBagItem.load('mysql', 'credentials')
 template node['qmailtoaster']['vpopmail']['home'] + '/etc/vpopmail.mysql' do
   source 'vpopmail/vpopmail.mysql.erb'
   variables(
@@ -14,7 +14,7 @@ end
 # deploy our admin account into the htpasswd file
 file node['qmailtoaster']['htpasswd']['file'] do
   content node['qmailtoaster']['htpasswd']['user'] + ':' +
-    node['qmailtoaster']['htpasswd']['passwordhash']
+          node['qmailtoaster']['htpasswd']['passwordhash']
 end
 
 # Workaround for apache configs not being loaded due to apaches conf.d folder

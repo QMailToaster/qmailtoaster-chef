@@ -1,6 +1,8 @@
 name              'qmailtoaster'
 maintainer        'Sebastian Grewe'
 maintainer_email  'sebastian.grewe@gmail.com'
+issues_url        'https://github.com/QMailToaster/qmailtoaster-chef/issues' if respond_to?(:issues_url)
+source_url        'https://github.com/QMailToaster/qmailtoaster-chef' if respond_to?(:source_url)
 license           'Apache 2.0'
 description       'Installs/configures qmailtoaster from binary packages supplied by the QMailtoaster Project'
 long_description  IO.read(File.join(File.dirname(__FILE__), 'README.md'))
@@ -10,14 +12,14 @@ recipe            'qmailtoaster::firewall', 'Installs/configures basic Shorewall
 
 supports 'centos', '>= 6.4'
 
-depends 'apache2', '~> 1.10.0'
-depends 'database', '~> 2.2.0'
-depends 'iptables', '~> 0.13.0'
-depends 'mysql', '~> 5.2.0'
-depends 'mysql-chef_gem', '~> 0.0.2'
-depends 'ntp', '~> 1.6.0'
-depends 'selinux', '~> 0.8.0'
-depends 'shorewall', '~> 0.0.19'
-depends 'yum', '~> 3.2.0'
-depends 'yum-epel', '~> 0.3.6'
-depends 'yum-repoforge', '~> 0.2.0'
+depends 'apache2'
+depends 'database'
+depends 'mysql'
+depends 'mariadb'
+depends 'mysql2_chef_gem'
+depends 'ntp'
+depends 'selinux'
+depends 'firewall'
+depends 'yum'
+depends 'yum-epel'
+depends 'yum-repoforge'
